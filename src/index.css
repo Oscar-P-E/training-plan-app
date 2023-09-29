@@ -1,3 +1,21 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+  html {
+    font-family: Inter, system-ui, sans-serif;
+  }
+
+  input {
+    border: 1px solid black;
+    border-radius: 0.5rem;
+    padding: 0.25rem 0.5rem;
+  }
+
+  .button-radio-input {
+    display: none;
+  }
+}
