@@ -42,27 +42,32 @@ export default function App() {
   function onSubmit(e: FormEvent) {
     e.preventDefault();
     if (!isLastStep) return nextStep();
-    else alert("Form submitted!");
+
+    alert(JSON.stringify(data, null, 2));
   }
 
   return (
-    <div className="relative grid justify-center border border-black rounded-lg p-8 max-w-5xl mx-auto">
+    <div className="relative grid justify-center border border-black rounded-lg p-8 max-w-5xl mx-auto m-4">
       <div className="absolute top-2 right-3">
         {currStepIdx + 1} / {steps.length}
       </div>
       <form className="grid justify-center pb-4" onSubmit={onSubmit}>
         {step}
-      </form>
-      <div className="flex pt-4 gap-4 justify-center">
-        {!isFirstStep && (
-          <button className="border border-black rounded-md py-1 px-2 w-20 bg-gray-300" onClick={prevStep}>
-            Back
+        <div className="flex pt-4 gap-4 justify-center">
+          {!isFirstStep && (
+            <button
+              type="button"
+              className="border border-black rounded-md py-1 px-2 w-20 bg-gray-300"
+              onClick={prevStep}
+            >
+              Back
+            </button>
+          )}
+          <button type="submit" className="border border-black rounded-md p-1 w-20 bg-gray-300" onClick={nextStep}>
+            {isLastStep ? "Finish" : "Next"}
           </button>
-        )}
-        <button className="border border-black rounded-md p-1 w-20 bg-gray-300" onClick={nextStep}>
-          {isLastStep ? "Finish" : "Next"}
-        </button>
-      </div>
+        </div>
+      </form>
     </div>
   );
 }
