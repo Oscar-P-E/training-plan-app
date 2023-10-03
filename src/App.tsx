@@ -1,46 +1,64 @@
 import { FormEvent, useState } from "react";
 import { Goal } from "./form/Goal";
 import { Experience } from "./form/Experience";
-import { Complication } from "./form/Complication";
 import { Days } from "./form/Days";
 import { useMultistepForm } from "./useMultistepForm";
 
 export type FormData = {
-  goal: "muscle" | "strength";
-  experience: "beginner" | "intermediate" | "advanced";
-  complication: "min" | "auto" | "max";
-  days: 2 | 3 | 4 | 5 | 6;
+  goal: "muscle" | "strength" | null;
+  experience: "beginner" | "intermediate" | "advanced" | null;
+  days: 2 | 3 | 4 | 5 | 6 | null;
 };
 
 const INITIAL_DATA: FormData = {
-  goal: "muscle",
-  experience: "beginner",
-  complication: "auto",
-  days: 3,
+  goal: null,
+  experience: null,
+  days: null,
 };
 
 export default function App() {
   const [data, setData] = useState(INITIAL_DATA);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   function updateFields(fields: Partial<FormData>) {
     setData((prev) => {
+      // Prevent unwanted combinations of experience and days when user goes back and changes experience
+      if (fields.experience && fields.experience !== prev.experience) {
+        return { ...prev, ...fields, days: null };
+      }
       return { ...prev, ...fields };
     });
   }
 
-  const { step, steps, prevStep, nextStep, isFirstStep, isLastStep, currStepIdx } = useMultistepForm([
-    <Goal {...data} updateFields={updateFields} />,
-    <Experience {...data} updateFields={updateFields} />,
-    <Complication {...data} updateFields={updateFields} />,
-    <Days {...data} updateFields={updateFields} />,
-  ]);
+  const { step, steps, prevStep, nextStep, isFirstStep, isLastStep, currStepIdx } =
+    useMultistepForm([
+      <Goal {...data} updateFields={updateFields} />,
+      <Experience {...data} updateFields={updateFields} />,
+      <Days {...data} updateFields={updateFields} />,
+    ]);
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
-    console.log(step);
-    if (!isLastStep) return nextStep();
+    setErrorMessage(null);
 
-    alert(JSON.stringify(data, null, 2));
+    if (currStepIdx === 0 && data.goal === null) {
+      setErrorMessage("Please select a goal");
+      return;
+    }
+    if (currStepIdx === 1 && data.experience === null) {
+      setErrorMessage("Please select an experience level");
+      return;
+    }
+    if (currStepIdx === 2 && data.days === null) {
+      setErrorMessage("Please select a number of days");
+      return;
+    }
+
+    if (!isLastStep) {
+      nextStep();
+    } else {
+      alert(JSON.stringify(data, null, 2));
+    }
   }
 
   return (
@@ -64,6 +82,7 @@ export default function App() {
             {isLastStep ? "Finish" : "Next"}
           </button>
         </div>
+        {errorMessage && <div className="text-red-500 pt-4 text-center">* {errorMessage}</div>}
       </form>
     </div>
   );

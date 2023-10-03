@@ -18,7 +18,9 @@ export function Goal({ goal, updateFields }: Props) {
         />
         <label
           className={`button-radio-label  py-2 px-4 rounded-xl text-center ${
-            goal === "muscle" ? "bg-purple-700 text-yellow-300 font-bold" : "bg-gray-300 hover:bg-gray-400"
+            goal === "muscle"
+              ? "bg-purple-800 text-yellow-300 font-bold"
+              : "bg-gray-300 hover:bg-gray-400"
           }`}
           htmlFor="muscle"
         >
@@ -35,7 +37,9 @@ export function Goal({ goal, updateFields }: Props) {
         />
         <label
           className={`button-radio-label py-2 px-4 rounded-xl text-center ${
-            goal === "strength" ? "bg-gray-950 text-red-600 font-bold" : "bg-gray-300 hover:bg-gray-400"
+            goal === "strength"
+              ? "bg-black text-red-600 font-bold"
+              : "bg-gray-300 hover:bg-gray-400"
           }`}
           htmlFor="strength"
         >
