@@ -60,7 +60,7 @@ export default function App() {
               Back
             </button>
           )}
-          <button type="submit" className="border border-black rounded-md p-1 w-20 bg-gray-300" onClick={nextStep}>
+          <button type="submit" className="border border-black rounded-md p-1 w-20 bg-gray-300">
             {isLastStep ? "Finish" : "Next"}
           </button>
         </div>
