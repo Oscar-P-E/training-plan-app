@@ -1,32 +1,11 @@
 import { FormWrapper } from "../FormWrapper";
+import { FormData } from "../App";
 
-export type Data = {
-  experience: "none" | "beginner" | "intermediate" | "advanced";
-};
+type Props = FormData & { updateFields: (fields: Partial<FormData>) => void };
 
-type Props = Data & { updateFields: (fields: Partial<Data>) => void };
-
-export function Page1({ experience, updateFields }: Props) {
+export function Experience({ experience, updateFields }: Props) {
   return (
     <FormWrapper title="Experience level">
-      <input
-        className="button-radio-input"
-        type="radio"
-        id="none"
-        name="experience"
-        value="none"
-        checked={experience === "none"}
-        onChange={(e) => updateFields({ experience: e.target.value as Data["experience"] })}
-      />
-      <label
-        className={`button-radio-label py-2 px-4 rounded-l-xl text-center ${
-          experience === "none" ? "bg-green-500" : "bg-gray-300 hover:bg-gray-400"
-        }`}
-        htmlFor="none"
-      >
-        None
-      </label>
-
       <input
         className="button-radio-input"
         type="radio"
@@ -34,11 +13,11 @@ export function Page1({ experience, updateFields }: Props) {
         name="experience"
         value="beginner"
         checked={experience === "beginner"}
-        onChange={(e) => updateFields({ experience: e.target.value as Data["experience"] })}
+        onChange={(e) => updateFields({ experience: e.target.value as FormData["experience"] })}
       />
       <label
-        className={`button-radio-label py-2 px-4 text-center ${
-          experience === "beginner" ? "bg-yellow-500" : "bg-gray-300 hover:bg-gray-400"
+        className={`button-radio-label py-2 px-4 text-center rounded-l-xl ${
+          experience === "beginner" ? "bg-green-500" : "bg-gray-300 hover:bg-gray-400"
         }`}
         htmlFor="beginner"
       >
@@ -51,7 +30,7 @@ export function Page1({ experience, updateFields }: Props) {
         name="experience"
         value="intermediate"
         checked={experience === "intermediate"}
-        onChange={(e) => updateFields({ experience: e.target.value as Data["experience"] })}
+        onChange={(e) => updateFields({ experience: e.target.value as FormData["experience"] })}
       />
       <label
         className={`button-radio-label py-2 px-4 text-center ${
@@ -68,10 +47,10 @@ export function Page1({ experience, updateFields }: Props) {
         name="experience"
         value="advanced"
         checked={experience === "advanced"}
-        onChange={(e) => updateFields({ experience: e.target.value as Data["experience"] })}
+        onChange={(e) => updateFields({ experience: e.target.value as FormData["experience"] })}
       />
       <label
-        className={`button-radio-label py-2 px-4 rounded-r-xl text-center ${
+        className={`button-radio-label py-2 px-4 text-center rounded-r-xl ${
           experience === "advanced" ? "bg-red-500" : "bg-gray-300 hover:bg-gray-400"
         }`}
         htmlFor="advanced"

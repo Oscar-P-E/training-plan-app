@@ -1,25 +1,21 @@
 import { FormEvent, useState } from "react";
-import { Page1 } from "./form/Page1";
-import { Page2 } from "./form/Page2";
-import { Page3 } from "./form/Page3";
-import { Page4 } from "./form/Page4";
+import { Goal } from "./form/Goal";
+import { Experience } from "./form/Experience";
+import { Complication } from "./form/Complication";
+import { Days } from "./form/Days";
 import { useMultistepForm } from "./useMultistepForm";
-import { Data as Page1Data } from "./form/Page1";
-import { Data as Page2Data } from "./form/Page2";
-import { Data as Page3Data } from "./form/Page3";
-import { Data as Page4Data } from "./form/Page4";
 
-type FormData = {
-  experience: Page1Data["experience"];
-  complexity: Page2Data["complexity"];
-  goal: Page3Data["goal"];
-  days: Page4Data["days"];
+export type FormData = {
+  goal: "muscle" | "strength";
+  experience: "beginner" | "intermediate" | "advanced";
+  complication: "min" | "auto" | "max";
+  days: 2 | 3 | 4 | 5 | 6;
 };
 
 const INITIAL_DATA: FormData = {
+  goal: "muscle",
   experience: "beginner",
-  complexity: "auto",
-  goal: "powerbuilding",
+  complication: "auto",
   days: 3,
 };
 
@@ -33,14 +29,15 @@ export default function App() {
   }
 
   const { step, steps, prevStep, nextStep, isFirstStep, isLastStep, currStepIdx } = useMultistepForm([
-    <Page1 {...data} updateFields={updateFields} />,
-    <Page2 {...data} updateFields={updateFields} />,
-    <Page3 {...data} updateFields={updateFields} />,
-    <Page4 {...data} updateFields={updateFields} />,
+    <Goal {...data} updateFields={updateFields} />,
+    <Experience {...data} updateFields={updateFields} />,
+    <Complication {...data} updateFields={updateFields} />,
+    <Days {...data} updateFields={updateFields} />,
   ]);
 
   function onSubmit(e: FormEvent) {
     e.preventDefault();
+    console.log(step);
     if (!isLastStep) return nextStep();
 
     alert(JSON.stringify(data, null, 2));
