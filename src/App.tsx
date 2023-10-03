@@ -22,9 +22,12 @@ export default function App() {
 
   function updateFields(fields: Partial<FormData>) {
     setData((prev) => {
-      // Prevent unwanted combinations of experience and days when user goes back and changes experience
+      // Prevent unwanted combinations when user goes back and changes selection
       if (fields.experience && fields.experience !== prev.experience) {
         return { ...prev, ...fields, days: null };
+      }
+      if (fields.goal && fields.goal !== prev.goal) {
+        return { ...prev, ...fields, experience: null };
       }
       return { ...prev, ...fields };
     });

@@ -3,7 +3,7 @@ import { FormData } from "../App";
 
 type Props = FormData & { updateFields: (fields: Partial<FormData>) => void };
 
-export function Experience({ experience, updateFields }: Props) {
+export function Experience({ goal, experience, updateFields }: Props) {
   return (
     <FormWrapper title="Experience level">
       <input
@@ -47,12 +47,13 @@ export function Experience({ experience, updateFields }: Props) {
         name="experience"
         value="advanced"
         checked={experience === "advanced"}
+        disabled={goal === "strength"}
         onChange={(e) => updateFields({ experience: e.target.value as FormData["experience"] })}
       />
       <label
-        className={`button-radio-label py-2 px-4 text-center rounded-r-xl ${
-          experience === "advanced" ? "bg-red-500" : "bg-gray-300 hover:bg-gray-400"
-        }`}
+        className={`button-radio-label py-2 px-4 text-center rounded-r-xl
+        ${experience === "advanced" ? "bg-red-500" : "bg-gray-300 hover:bg-gray-400"}
+        ${goal === "strength" ? "opacity-30 cursor-not-allowed" : ""}`}
         htmlFor="advanced"
       >
         Advanced

@@ -3,7 +3,7 @@ import { FormData } from "../App";
 
 type Props = FormData & { updateFields: (fields: Partial<FormData>) => void };
 
-export function Days({ experience, days, updateFields }: Props) {
+export function Days({ goal, experience, days, updateFields }: Props) {
   const options = [
     { value: 2, color: "bg-sky-500" },
     { value: 3, color: "bg-green-500" },
@@ -13,9 +13,16 @@ export function Days({ experience, days, updateFields }: Props) {
   ];
 
   const isDisabled = (value: number) => {
-    if (experience === "beginner" && value > 4) return true;
-    if (experience === "intermediate" && value < 4) return true;
-    if (experience === "advanced" && value !== 6) return true;
+    if (goal === "muscle") {
+      if (experience === "beginner" && value > 4) return true;
+      if (experience === "intermediate" && value < 4) return true;
+      if (experience === "advanced" && value !== 6) return true;
+    }
+    if (goal === "strength") {
+      if (experience === "beginner" && value > 4) return true;
+      if (experience === "intermediate" && (value < 3 || value > 4)) return true;
+      // no advanced strength
+    }
     return false;
   };
 
@@ -36,7 +43,7 @@ export function Days({ experience, days, updateFields }: Props) {
           <label
             className={`button-radio-label py-2 px-4 text-center ${
               days === option.value ? option.color : "bg-gray-300 hover:bg-gray-400"
-            } ${isDisabled(option.value) && "opacity-50 cursor-not-allowed"}
+            } ${isDisabled(option.value) && "opacity-30 cursor-not-allowed"}
             ${index === 0 ? "rounded-l-xl" : ""} ${
               index === options.length - 1 ? "rounded-r-xl" : ""
             }`}
