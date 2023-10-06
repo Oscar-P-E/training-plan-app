@@ -5,8 +5,8 @@ import { Days } from "./form/Days";
 import { useMultistepForm } from "./useMultistepForm";
 
 export type FormData = {
-  goal: "muscle" | "strength" | null;
-  experience: "beginner" | "intermediate" | "advanced" | null;
+  goal: "muscle" | "powerlifting" | null;
+  experience: "beg-int" | "int-adv" | null;
   days: 2 | 3 | 4 | 5 | 6 | null;
 };
 
@@ -65,7 +65,7 @@ export default function App() {
   }
 
   return (
-    <div className="relative grid justify-center border border-black rounded-lg p-8 max-w-5xl mx-auto m-4">
+    <div className="relative grid justify-center p-8 max-w-5xl mx-auto m-4">
       <div className="absolute top-2 right-3">
         {currStepIdx + 1} / {steps.length}
       </div>

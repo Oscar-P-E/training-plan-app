@@ -3,60 +3,42 @@ import { FormData } from "../App";
 
 type Props = FormData & { updateFields: (fields: Partial<FormData>) => void };
 
-export function Experience({ goal, experience, updateFields }: Props) {
+export function Experience({ experience, updateFields }: Props) {
   return (
     <FormWrapper title="Experience level">
       <input
         className="button-radio-input"
         type="radio"
-        id="beginner"
+        id="beg-int"
         name="experience"
-        value="beginner"
-        checked={experience === "beginner"}
+        value="beg-int"
+        checked={experience === "beg-int"}
         onChange={(e) => updateFields({ experience: e.target.value as FormData["experience"] })}
       />
       <label
-        className={`button-radio-label py-2 px-4 text-center rounded-l-xl ${
-          experience === "beginner" ? "bg-green-500" : "bg-gray-300 hover:bg-gray-400"
+        className={`button-radio-label py-2 px-4 text-center rounded-xl ${
+          experience === "beg-int" ? "bg-amber-500" : "bg-gray-300 hover:bg-gray-400"
         }`}
-        htmlFor="beginner"
+        htmlFor="beg-int"
       >
-        Beginner
+        Beginner / Intermediate
       </label>
       <input
         className="button-radio-input"
         type="radio"
-        id="intermediate"
+        id="int-adv"
         name="experience"
-        value="intermediate"
-        checked={experience === "intermediate"}
+        value="int-adv"
+        checked={experience === "int-adv"}
         onChange={(e) => updateFields({ experience: e.target.value as FormData["experience"] })}
       />
       <label
-        className={`button-radio-label py-2 px-4 text-center ${
-          experience === "intermediate" ? "bg-orange-500" : "bg-gray-300 hover:bg-gray-400"
+        className={`button-radio-label py-2 px-4 text-center rounded-xl ${
+          experience === "int-adv" ? "bg-amber-500" : "bg-gray-300 hover:bg-gray-400"
         }`}
-        htmlFor="intermediate"
+        htmlFor="int-adv"
       >
-        Intermediate
-      </label>
-      <input
-        className="button-radio-input"
-        type="radio"
-        id="advanced"
-        name="experience"
-        value="advanced"
-        checked={experience === "advanced"}
-        disabled={goal === "strength"}
-        onChange={(e) => updateFields({ experience: e.target.value as FormData["experience"] })}
-      />
-      <label
-        className={`button-radio-label py-2 px-4 text-center rounded-r-xl
-        ${experience === "advanced" ? "bg-red-500" : "bg-gray-300 hover:bg-gray-400"}
-        ${goal === "strength" ? "opacity-30 cursor-not-allowed" : ""}`}
-        htmlFor="advanced"
-      >
-        Advanced
+        Intermediate / Advanced
       </label>
     </FormWrapper>
   );

@@ -6,7 +6,7 @@ type Props = FormData & { updateFields: (fields: Partial<FormData>) => void };
 export function Goal({ goal, updateFields }: Props) {
   return (
     <FormWrapper title="Primary goal">
-      <div className="grid grid-flow-row gap-2">
+      {/* <div className="grid grid-flow-row gap-2"> */}
         <input
           className="button-radio-input"
           type="radio"
@@ -19,33 +19,33 @@ export function Goal({ goal, updateFields }: Props) {
         <label
           className={`button-radio-label  py-2 px-4 rounded-xl text-center ${
             goal === "muscle"
-              ? "bg-purple-800 text-yellow-300 font-bold"
+              ? "bg-amber-500"
               : "bg-gray-300 hover:bg-gray-400"
           }`}
           htmlFor="muscle"
         >
-          Build Muscle
+          Gain muscle - I want to get bigger (and also stronger in general)
         </label>
         <input
           className="button-radio-input"
           type="radio"
-          id="strength"
+          id="powerlifting"
           name="goal"
-          value="strength"
-          checked={goal === "strength"}
+          value="powerlifting"
+          checked={goal === "powerlifting"}
           onChange={(e) => updateFields({ goal: e.target.value as FormData["goal"] })}
         />
         <label
           className={`button-radio-label py-2 px-4 rounded-xl text-center ${
-            goal === "strength"
-              ? "bg-black text-red-600 font-bold"
+            goal === "powerlifting"
+              ? "bg-amber-500"
               : "bg-gray-300 hover:bg-gray-400"
           }`}
-          htmlFor="strength"
+          htmlFor="powerlifting"
         >
-          Build Strength
+          Powerlifting - I want to increase my 1RM in the squat/bench/deadlift
         </label>
-      </div>
+      {/* </div> */}
     </FormWrapper>
   );
 }

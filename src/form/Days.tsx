@@ -13,16 +13,8 @@ export function Days({ goal, experience, days, updateFields }: Props) {
   ];
 
   const isDisabled = (value: number) => {
-    if (goal === "muscle") {
-      if (experience === "beginner" && value > 4) return true;
-      if (experience === "intermediate" && value < 4) return true;
-      if (experience === "advanced" && value !== 6) return true;
-    }
-    if (goal === "strength") {
-      if (experience === "beginner" && value > 4) return true;
-      if (experience === "intermediate" && (value < 3 || value > 4)) return true;
-      // no advanced strength
-    }
+    if (experience === "int-adv" && value < 4) return true;
+    if (goal === "powerlifting" && value > 5) return true;
     return false;
   };
 
@@ -44,8 +36,8 @@ export function Days({ goal, experience, days, updateFields }: Props) {
             className={`button-radio-label py-2 px-4 text-center ${
               days === option.value ? option.color : "bg-gray-300 hover:bg-gray-400"
             } ${isDisabled(option.value) && "opacity-30 cursor-not-allowed"}
-            ${index === 0 ? "rounded-l-xl" : ""} ${
-              index === options.length - 1 ? "rounded-r-xl" : ""
+            ${index === 0 ? "rounded-t-xl" : ""} ${
+              index === options.length - 1 ? "rounded-b-xl" : ""
             }`}
             htmlFor={option.value.toString()}
           >
@@ -57,18 +49,16 @@ export function Days({ goal, experience, days, updateFields }: Props) {
   );
 }
 
-// Combinations:
-// muscle, beginner, 2 days
-// muscle, beginner, 3 days
-// muscle, beginner, 4 days
-// strength, beginner, 2 days
-// strength, beginner, 3 days
-// strength, beginner, 4 days
-// muscle, intermediate, 4 days
-// muscle, intermediate, 5 days
-// muscle, intermediate, 6 days
-// strength, intermediate, 4 days
-// strength, intermediate, 5 days
-// strength, intermediate, 6 days
-// muscle, advanced, 6 days
-// strength, advanced, 6 days
+// 12 Possible Combinations:
+// muscle, beginner, 2
+// muscle, beginner, 3
+// muscle, beginner, 4
+// muscle, intermediate, 4
+// muscle, intermediate, 5
+// muscle, intermediate, 6
+// muscle, advanced, 6
+// strength, beginner, 2
+// strength, beginner, 3
+// strength, beginner, 4
+// strength, intermediate, 3
+// strength, intermediate, 4
